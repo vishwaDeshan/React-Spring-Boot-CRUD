@@ -1,5 +1,6 @@
 package com.vishwa.server.controller;
 
+import com.vishwa.server.exception.UserNotFoundException;
 import com.vishwa.server.model.User;
 import com.vishwa.server.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,12 @@ public class UserController {
     @GetMapping("/users")
     List<User> getAllUsers(){
         return userRepository.findAll();
+    }
+
+    @GetMapping("/user/{id}")
+    User getUserById(@PathVariable Long id ){
+        return userRepository.findById(id)
+                .orElseThrow(()->new UserNotFoundException(id));
     }
 
 }
