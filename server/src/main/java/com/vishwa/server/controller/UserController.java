@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @PutMapping("/user/{id}")
-    User updateUserById(@PathVariable User newUser, @PathVariable Long id) {
+    User updateUser(@PathVariable User newUser, @PathVariable Long id) {
         return userRepository.findById(id)
                 .map(user -> {
                     user.setUsername(newUser.getUsername());
